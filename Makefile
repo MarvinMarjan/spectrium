@@ -42,11 +42,6 @@ FINAL_OBJECTS = $(addprefix $(OUT_PATH)/, $(notdir $(OBJECTS)))
 all: build
 
 
-run:
-	@ echo Running...
-	@ $(APP_PATH)
-
-
 
 
 build: $(OUT_PATH) $(CPP_DEPENDENCIES) $(OBJECTS)
