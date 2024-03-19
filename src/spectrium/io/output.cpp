@@ -1,0 +1,1 @@
+#include <spectrium/io/output.hpp>
