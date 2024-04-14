@@ -38,25 +38,109 @@ std::string SPECTRIUM_NAMESPACE clr(const std::string& source, const std::initia
 
 
 
-std::string SPECTRIUM_NAMESPACE clr(const std::string& source, ANSIColorCode16 fg_color) noexcept
+
+
+
+
+std::string SPECTRIUM_NAMESPACE clr(const std::string& source, const ANSIColorCode16 fg_color) noexcept
 {
 	return clr(source, { normal, fg_color });
 }
 
 
-std::string SPECTRIUM_NAMESPACE clr(const std::string& source, ANSIColorCode16 fg_color, ANSIColorMode mode) noexcept
+std::string SPECTRIUM_NAMESPACE clr(const std::string& source, const ANSIColorCode16 fg_color, const ANSIColorMode mode) noexcept
 {
 	return clr(source, { mode, fg_color });
 }
 
 
-std::string SPECTRIUM_NAMESPACE clr(const std::string& source, ANSIColorCode16 fg_color, ANSIColorCode16 bg_color) noexcept
+std::string SPECTRIUM_NAMESPACE clr(const std::string& source, const ANSIColorCode16 fg_color, const ANSIColorCode16 bg_color) noexcept
 {
 	return clr(source, { normal, fg_color, bg_color });
 }
 
 
-std::string SPECTRIUM_NAMESPACE clr(const std::string& source, ANSIColorCode16 fg_color, ANSIColorCode16 bg_color, ANSIColorMode mode) noexcept
+std::string SPECTRIUM_NAMESPACE clr(const std::string& source, const ANSIColorCode16 fg_color, const ANSIColorCode16 bg_color, const ANSIColorMode mode) noexcept
 {
 	return clr(source, { mode, fg_color, bg_color });
+}
+
+
+
+std::string SPECTRIUM_NAMESPACE clr(const ANSIColorCode16 fg_color) noexcept
+{
+	return clr({ normal, fg_color });
+}
+
+
+std::string SPECTRIUM_NAMESPACE clr(const ANSIColorCode16 fg_color, const ANSIColorMode mode) noexcept
+{
+	return clr({ mode, fg_color });
+}
+
+
+std::string SPECTRIUM_NAMESPACE clr(const ANSIColorCode16 fg_color, const ANSIColorCode16 bg_color) noexcept
+{
+	return clr({ normal, fg_color, bg_color });
+}
+
+
+std::string SPECTRIUM_NAMESPACE clr(const ANSIColorCode16 fg_color, const ANSIColorCode16 bg_color, const ANSIColorMode mode) noexcept
+{
+	return clr({ mode, fg_color, bg_color });
+}
+
+
+
+
+
+
+
+
+std::string SPECTRIUM_NAMESPACE clr(const std::string& source, const std::uint8_t fg_color) noexcept
+{
+	return clr(source, { normal, fg_special, SPECIAL_8BITCLR, fg_color });
+}
+
+
+std::string SPECTRIUM_NAMESPACE clr(const std::string& source, const std::uint8_t fg_color, const ANSIColorMode mode) noexcept
+{
+	return clr(source, { mode, fg_special, SPECIAL_8BITCLR, fg_color });
+}
+
+
+std::string SPECTRIUM_NAMESPACE clr(const std::string& source, const std::uint8_t fg_color, const std::uint8_t bg_color) noexcept
+{
+	return clr(source, { normal, fg_special, SPECIAL_8BITCLR, fg_color, bg_special, SPECIAL_8BITCLR, bg_color });
+}
+
+
+std::string SPECTRIUM_NAMESPACE clr(const std::string& source, const std::uint8_t fg_color, const std::uint8_t bg_color, const ANSIColorMode mode) noexcept
+{
+	return clr(source, { mode, fg_special, SPECIAL_8BITCLR, fg_color, bg_special, SPECIAL_8BITCLR, bg_color });
+}
+
+
+
+std::string SPECTRIUM_NAMESPACE clr(const std::uint8_t fg_color) noexcept
+{
+	return clr({ normal, fg_special, SPECIAL_8BITCLR, fg_color });
+}
+
+
+std::string SPECTRIUM_NAMESPACE clr(const std::uint8_t fg_color, const ANSIColorMode mode) noexcept
+{
+	return clr({ mode, fg_special, SPECIAL_8BITCLR, fg_color });
+}
+
+
+std::string SPECTRIUM_NAMESPACE clr(const std::uint8_t fg_color, const std::uint8_t bg_color) noexcept
+{
+	return clr({ normal, fg_special, SPECIAL_8BITCLR, fg_color, bg_special, SPECIAL_8BITCLR, bg_color });
+}
+
+
+std::string SPECTRIUM_NAMESPACE clr(const std::uint8_t fg_color, const std::uint8_t bg_color, const ANSIColorMode mode) noexcept
+{
+	return clr({ mode, fg_special, SPECIAL_8BITCLR, fg_color, bg_special, SPECIAL_8BITCLR, bg_color });
 }

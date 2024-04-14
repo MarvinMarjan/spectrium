@@ -32,6 +32,10 @@ enum ANSIColorCode16
 };
 
 
+const std::uint8_t SPECIAL_8BITCLR = 5;
+const std::uint8_t SPECIAL_RGBCLR = 2;
+
+
 enum ANSIColorMode
 {
 	normal = 0,
@@ -64,19 +68,49 @@ const std::string RESET = GLOBAL_ESCC + "0m"; /**< Resets text color and mode. *
 std::string clr(const std::initializer_list<int>& codes) noexcept;
 std::string clr(const std::string& source, const std::initializer_list<int>& codes) noexcept;
 
+
 /**
  * @brief Uses 16 pre-defined ANSI colors.
  *
  * @param source: The string source to be painted.
  * @param fg_color: The foreground color.
  *
- * There are also other overloads that accepts background colors and exhibition mode.
+ * There are also other overloads that accepts background colors, exhibition mode and others that only returns the
+ * created escape sequence.
  * */
 std::string clr(const std::string& source, ANSIColorCode16 fg_color) noexcept;
 std::string clr(const std::string& source, ANSIColorCode16 fg_color, ANSIColorMode mode) noexcept;
 std::string clr(const std::string& source, ANSIColorCode16 fg_color, ANSIColorCode16 bg_color) noexcept;
 std::string clr(const std::string& source, ANSIColorCode16 fg_color, ANSIColorCode16 bg_color, ANSIColorMode mode) noexcept;
 
+std::string clr(ANSIColorCode16 fg_color) noexcept;
+std::string clr(ANSIColorCode16 fg_color, ANSIColorMode mode) noexcept;
+std::string clr(ANSIColorCode16 fg_color, ANSIColorCode16 bg_color) noexcept;
+std::string clr(ANSIColorCode16 fg_color, ANSIColorCode16 bg_color, ANSIColorMode mode) noexcept;
+
+
+
+/**
+ * @brief Uses 8-bit (0-256) ANSI colors.
+ *
+ * @param source: The string source to be painted.
+ * @param fg_color: The foreground color.
+ *
+ * There are also other overloads that accepts background colors, exhibition mode and others that only returns the
+ * created escape sequence.
+ *
+ * A table with the 256 colors and its visual representation can be found at
+ * https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797#256-colors
+ * */
+std::string clr(const std::string& source, std::uint8_t fg_color) noexcept;
+std::string clr(const std::string& source, std::uint8_t fg_color, ANSIColorMode mode) noexcept;
+std::string clr(const std::string& source, std::uint8_t fg_color, std::uint8_t bg_color) noexcept;
+std::string clr(const std::string& source, std::uint8_t fg_color, std::uint8_t bg_color, ANSIColorMode mode) noexcept;
+
+std::string clr(std::uint8_t fg_color) noexcept;
+std::string clr(std::uint8_t fg_color, ANSIColorMode mode) noexcept;
+std::string clr(std::uint8_t fg_color, std::uint8_t bg_color) noexcept;
+std::string clr(std::uint8_t fg_color, std::uint8_t bg_color, ANSIColorMode mode) noexcept;
 
 
 SPECTRIUM_NAMESPACE_END
