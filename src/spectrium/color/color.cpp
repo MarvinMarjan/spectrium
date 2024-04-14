@@ -8,18 +8,22 @@ std::string SPECTRIUM_NAMESPACE clr(const std::initializer_list<int>& codes) noe
 {
 	std::stringstream escape_code;
 
+	// begins the escape sequence.
 	escape_code << GLOBAL_ESCC;
 
 
 	for (const int& code : codes)
 	{
+		// adds the code.
 		escape_code << std::to_string(code);
 
+		// ';' is not added to the last code of the sequence.
 		if (&code != codes.end() - 1)
 			escape_code << ';';
 	}
 
 
+	// ends the escape sequence.
 	escape_code << 'm';
 
 	return escape_code.str();
