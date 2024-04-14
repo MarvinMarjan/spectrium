@@ -1,0 +1,1 @@
+#include <spectrium/color/color_object.hpp>
