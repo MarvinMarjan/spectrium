@@ -5,7 +5,7 @@
 #include <string>
 #include <initializer_list>
 
-#include <spectrium/color/escape.hpp>
+#include <spectrium/color/escape_introducer.hpp>
 
 
 
@@ -31,8 +31,8 @@ enum ANSIColorCode16
 };
 
 
-const std::uint8_t SPECIAL_8BITCLR = 5;
-const std::uint8_t SPECIAL_RGBCLR = 2;
+const int SPECIAL_8BITCLR = 5;
+const int SPECIAL_RGBCLR = 2;
 
 
 enum ANSIColorMode
@@ -60,7 +60,8 @@ struct ColorStruct;
 
 
 using ColorStruct16 = ColorStruct<ANSIColorCode16>;
-using ColorStruct256 = ColorStruct<std::int16_t>;
+using ColorStruct256 = ColorStruct<int>;
+
 
 
 
@@ -114,15 +115,15 @@ std::string clr(ANSIColorCode16 fg_color, ANSIColorCode16 bg_color, ANSIColorMod
  * A table with the 256 colors and its visual representation can be found at
  * https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797#256-colors
  * */
-std::string clr(const std::string& source, std::int16_t fg_color) noexcept;
-std::string clr(const std::string& source, std::int16_t fg_color, ANSIColorMode mode) noexcept;
-std::string clr(const std::string& source, std::int16_t fg_color, std::int16_t bg_color) noexcept;
-std::string clr(const std::string& source, std::int16_t fg_color, std::int16_t bg_color, ANSIColorMode mode) noexcept;
+std::string clr(const std::string& source, int fg_color) noexcept;
+std::string clr(const std::string& source, int fg_color, ANSIColorMode mode) noexcept;
+std::string clr(const std::string& source, int fg_color, int bg_color) noexcept;
+std::string clr(const std::string& source, int fg_color, int bg_color, ANSIColorMode mode) noexcept;
 
-std::string clr(std::int16_t fg_color) noexcept;
-std::string clr(std::int16_t fg_color, ANSIColorMode mode) noexcept;
-std::string clr(std::int16_t fg_color, std::int16_t bg_color) noexcept;
-std::string clr(std::int16_t fg_color, std::int16_t bg_color, ANSIColorMode mode) noexcept;
+std::string clr(int fg_color) noexcept;
+std::string clr(int fg_color, ANSIColorMode mode) noexcept;
+std::string clr(int fg_color, int bg_color) noexcept;
+std::string clr(int fg_color, int bg_color, ANSIColorMode mode) noexcept;
 
 
 

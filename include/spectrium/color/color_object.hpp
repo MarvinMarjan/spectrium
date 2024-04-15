@@ -30,8 +30,8 @@ struct ColorStruct<ANSIColorCode16>
 template <>
 struct ColorStruct<std::int16_t>
 {
-	std::int16_t foreground = -1;
-	std::int16_t background = -1;
+	int foreground = -1;
+	int background = -1;
 	ANSIColorMode mode = normal;
 };
 
