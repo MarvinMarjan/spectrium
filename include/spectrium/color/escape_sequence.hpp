@@ -21,13 +21,17 @@ public:
 	ANSIEscapeSequence() = default;
 	virtual ~ANSIEscapeSequence() = default;
 
+
 	virtual std::string make_sequence() const noexcept = 0;
+	virtual bool is_invalid() const noexcept;
+
 
 protected:
 	friend std::string make_escape_sequence(ANSIEscapeSequence* foreground_sequence, ANSIEscapeSequence* background_sequence, ANSIColorMode mode) noexcept;
 
 	ANSIColorCode16 m_type = fg_special;
 };
+
 
 
 
@@ -43,12 +47,14 @@ public:
 
 
 
+
 class ANSI256EscapeSequence : public ANSIEscapeSequence
 {
 public:
 	explicit ANSI256EscapeSequence(int code = -1);
 
 	std::string make_sequence() const noexcept override;
+	bool is_invalid() const noexcept override;
 
 	int code;
 };

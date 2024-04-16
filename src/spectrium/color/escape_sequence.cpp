@@ -4,15 +4,24 @@
 
 
 
+bool SPECTRIUM_NAMESPACE ANSIEscapeSequence::is_invalid() const noexcept
+{
+	return false;
+}
+
+
+
+
+
 std::string SPECTRIUM_NAMESPACE make_escape_sequence(ANSIEscapeSequence* const foreground_sequence, ANSIEscapeSequence* const background_sequence, const ANSIColorMode mode) noexcept
 {
-	const bool has_foreground = foreground_sequence;
-	const bool has_background = background_sequence;
+	const bool valid_foreground = foreground_sequence && !foreground_sequence->is_invalid();
+	const bool valid_background = background_sequence && !background_sequence->is_invalid();
 
-	if (has_foreground)
+	if (valid_foreground)
 		foreground_sequence->m_type = fg_special;
 
-	if (has_background)
+	if (valid_background)
 		background_sequence->m_type = bg_special;
 
 
@@ -22,10 +31,10 @@ std::string SPECTRIUM_NAMESPACE make_escape_sequence(ANSIEscapeSequence* const f
 	sequence << GLOBAL_ESCC;
 	sequence << mode;
 
-	if (has_foreground)
+	if (valid_foreground)
 		sequence << ';' << foreground_sequence->make_sequence();
 
-	if (has_background)
+	if (valid_background)
 		sequence << ';' << background_sequence->make_sequence();
 
 	sequence << 'm';
@@ -66,6 +75,9 @@ SPECTRIUM_NAMESPACE ANSI256EscapeSequence::ANSI256EscapeSequence(int code)
 
 std::string SPECTRIUM_NAMESPACE ANSI256EscapeSequence::make_sequence() const noexcept
 {
+	if (is_invalid())
+		return {};
+
 	std::stringstream sequence;
 
 	sequence << ((m_type == fg_special) ? 38 : 48) << ';';
@@ -73,4 +85,10 @@ std::string SPECTRIUM_NAMESPACE ANSI256EscapeSequence::make_sequence() const noe
 	sequence << code;
 
 	return sequence.str();
+}
+
+
+bool SPECTRIUM_NAMESPACE ANSI256EscapeSequence::is_invalid() const noexcept
+{
+	return code < 0;
 }
