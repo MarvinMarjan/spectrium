@@ -15,6 +15,9 @@ std::string apply_escape_sequence(const std::string& source, ANSIEscapeSequence*
 
 
 
+/**
+ * @brief Base class for the ANSI escape code sequences.
+ * */
 class ANSIEscapeSequence
 {
 public:
@@ -22,22 +25,37 @@ public:
 	virtual ~ANSIEscapeSequence() = default;
 
 
+	/**
+	 * @returns The string escape sequence.
+	 * */
 	virtual std::string make_sequence() const noexcept = 0;
+
+
+	/**
+	 * @returns True if this sequence is invalid, false otherwise.
+	 * */
 	virtual bool is_invalid() const noexcept;
 
 
 protected:
 	friend std::string make_escape_sequence(ANSIEscapeSequence* foreground_sequence, ANSIEscapeSequence* background_sequence, ANSIColorMode mode) noexcept;
 
-	ANSIColorCode16 m_type = fg_special;
+	ANSIColorCode16 m_type = fg_special; /**< "fg_special" or "bg_special" */
 };
 
 
 
 
+/**
+ * @brief 16 pre-defined coloring ANSI escape sequence.
+ * */
 class ANSI16EscapeSequence : public ANSIEscapeSequence
 {
 public:
+
+	/**
+	 * @param code: The color code as an "ANSIColorCode16" enum.
+	 * */
 	explicit ANSI16EscapeSequence(ANSIColorCode16 code = fg_default);
 
 	std::string make_sequence() const noexcept override;
@@ -51,6 +69,9 @@ public:
 class ANSI256EscapeSequence : public ANSIEscapeSequence
 {
 public:
+	/**
+	 * @param code: The code of any 8-bit value (0-255)
+	 * */
 	explicit ANSI256EscapeSequence(int code = -1);
 
 	std::string make_sequence() const noexcept override;
