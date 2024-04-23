@@ -54,6 +54,14 @@ const std::string RESET = GLOBAL_ESCC + "0m"; /**< Resets text color and mode. *
 
 
 
+struct RGBColor
+{
+	int red = 255;
+	int green = 255;
+	int blue = 255;
+};
+
+
 
 template <typename T>
 struct ColorStruct;
@@ -61,8 +69,7 @@ struct ColorStruct;
 
 using ColorStruct16 = ColorStruct<ANSIColorCode16>;
 using ColorStruct256 = ColorStruct<int>;
-
-
+using ColorStructRGB = ColorStruct<RGBColor>;
 
 
 
@@ -128,6 +135,19 @@ std::string clr(int fg_color, int bg_color, ANSIColorMode mode) noexcept;
 
 
 
+std::string clr(const std::string& source, const RGBColor& fg_color) noexcept;
+std::string clr(const std::string& source, const RGBColor& fg_color, ANSIColorMode mode) noexcept;
+std::string clr(const std::string& source, const RGBColor& fg_color, const RGBColor& bg_color) noexcept;
+std::string clr(const std::string& source, const RGBColor& fg_color, const RGBColor& bg_color, ANSIColorMode mode) noexcept;
+
+std::string clr(const RGBColor& fg_color) noexcept;
+std::string clr(const RGBColor& fg_color, ANSIColorMode mode) noexcept;
+std::string clr(const RGBColor& fg_color, const RGBColor& bg_color) noexcept;
+std::string clr(const RGBColor& fg_color, const RGBColor& bg_color, ANSIColorMode mode) noexcept;
+
+
+
+
 std::string clr(const std::string& source, const ColorStruct16& color) noexcept;
 std::string clr(const ColorStruct16& color) noexcept;
 
@@ -136,6 +156,12 @@ std::string clr(const ColorStruct16& color) noexcept;
 
 std::string clr(const std::string& source, const ColorStruct256& color) noexcept;
 std::string clr(const ColorStruct256& color) noexcept;
+
+
+
+
+std::string clr(const std::string& source, const ColorStructRGB& color) noexcept;
+std::string clr(const ColorStructRGB& color) noexcept;
 
 
 SPECTRIUM_NAMESPACE_END

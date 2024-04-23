@@ -28,10 +28,19 @@ struct ColorStruct<ANSIColorCode16>
 
 
 template <>
-struct ColorStruct<std::int16_t>
+struct ColorStruct<int>
 {
 	int foreground = -1;
 	int background = -1;
+	ANSIColorMode mode = normal;
+};
+
+
+template <>
+struct ColorStruct<RGBColor>
+{
+	RGBColor foreground = {-1, -1, -1};
+	RGBColor background = {-1, -1, -1};
 	ANSIColorMode mode = normal;
 };
 

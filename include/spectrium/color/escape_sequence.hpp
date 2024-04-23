@@ -81,4 +81,18 @@ public:
 };
 
 
+
+
+class ANSIRGBEscapeSequence : public ANSIEscapeSequence
+{
+public:
+	explicit ANSIRGBEscapeSequence(const RGBColor& rgb);
+
+	std::string make_sequence() const noexcept override;
+	bool is_invalid() const noexcept override;
+
+	RGBColor rgb;
+};
+
+
 SPECTRIUM_NAMESPACE_END

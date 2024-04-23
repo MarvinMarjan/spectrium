@@ -92,3 +92,33 @@ bool SPECTRIUM_NAMESPACE ANSI256EscapeSequence::is_invalid() const noexcept
 {
 	return code < 0;
 }
+
+
+
+
+
+SPECTRIUM_NAMESPACE ANSIRGBEscapeSequence::ANSIRGBEscapeSequence(const RGBColor& rgb)
+{
+	this->rgb = rgb;
+}
+
+
+std::string SPECTRIUM_NAMESPACE ANSIRGBEscapeSequence::make_sequence() const noexcept
+{
+	if (is_invalid())
+		return {};
+
+	std::stringstream sequence;
+
+	sequence << ((m_type == fg_special) ? 38 : 48) << ';';
+	sequence << SPECIAL_RGBCLR << ';';
+	sequence << rgb.red << ';' << rgb.green << ';' << rgb.blue;
+
+	return sequence.str();
+}
+
+
+bool SPECTRIUM_NAMESPACE ANSIRGBEscapeSequence::is_invalid() const noexcept
+{
+	return (rgb.red < 0 || rgb.green < 0 || rgb.blue < 0);
+}
